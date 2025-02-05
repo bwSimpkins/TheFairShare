@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request  
-import RentCalculator  # Import your Python script  
+import script  # Import your Python script  
 
 app = Flask(__name__)  
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():  
     if request.method == 'POST':  
         user_input = request.form['user_input']  # Get input from form  
-        result = RentCalculator.process_input(user_input)  # Process input in script.py  
+        result = script.process_input(user_input)  # Process input in script.py  
         return render_template('index.html', result=result)  
 
     return render_template('index.html', result=None)  

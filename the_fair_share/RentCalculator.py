@@ -21,10 +21,7 @@ import matplotlib.ticker as ticker
 # 5: Adding commas to numbers.
 # 6: Add a graph that shows your savings over time.
 
-def process_input(user_input):  
-    return f"You entered: {user_input}"  
 
-""""
 # Adds commas to the values and rounds decimals
 def format_currecy_value(value):
     locale.setlocale(locale.LC_ALL, '')
@@ -162,4 +159,3 @@ while keep_calculating:
         print("---------------------------------------------------------------------"
               "---------------------------------------------------------------------")
         print("Thanks for using fair share!!")
-"""
