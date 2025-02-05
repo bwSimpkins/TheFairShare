@@ -27,6 +27,9 @@ def format_currecy_value(value):
     locale.setlocale(locale.LC_ALL, '')
     return locale.currency(value, symbol=False, grouping=True)
 
+def process_input(user_input):  
+    return f"You entered: {user_input}"  
+
 
 # Calculations are based on the assumption that an individuals shouldn't spend more than 25% of their monthly income
 # on rent.
