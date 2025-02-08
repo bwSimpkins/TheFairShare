@@ -74,9 +74,9 @@
                 let formData = $(this).serialize();
 
                 $.post("/", formData, function(data) {
-                    $("#resultText").text(data.result);
-                    $("#resultContainer").fadeIn();
-                }, "json");
+                $("#resultText").html(data.result.replace(/\n/g, "<br>")); // Convert newlines to <br>
+                $("#resultContainer").fadeIn();
+            }, "json");
             });
         });
     </script>
