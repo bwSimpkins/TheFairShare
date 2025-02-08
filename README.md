@@ -1,8 +1,8 @@
 The Fair Share tells individuals their fair share when paying for expenses. We have the philosophy that the definition of fair changes with income. 
-If two individuals were splitting the cost of a $1,000 trip while individual one makes $20,000 and individual two makes $100,000 we would believe that the proper 
-allotment would be $167 for individual one and $833 for individual two. This means that both individuals pay the same percentage of their income for
-the trip. We believe that for any relationship where money is exchanged to be successful, whether it is platonic or romantic, you must recognize that we
-are not all created equal when it comes to income. 
+For example, if two individuals were splitting the cost of a $1,000 trip with individual one making $20,000 a year and individual two making $100,000
+a year we would believe that the proper allotment would be $167 for individual one and $833 for individual two. This means that both individuals pay 
+the same percentage of their income for the trip. We believe that for any relationship where money is exchanged to be successful, whether it is platonic
+or romantic, you must recognize that we are not all created equal when it comes to income. 
 
 Financial Simulation:
 Users can enter income, debt, age, children, location, etc. Fair Share will calculate how much they should spend on housing, utilities, debt, etc.
