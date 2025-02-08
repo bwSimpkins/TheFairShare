@@ -5,8 +5,6 @@ def format_currecy_value(value):
     locale.setlocale(locale.LC_ALL, '')
     return locale.currency(value, symbol=False, grouping=True)
 
-# Calculates the 
-
 def process_multiple_inputs(inputs):
     try:
         numbers = [float(value) for value in inputs.values()]  # Convert inputs to floats
