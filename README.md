@@ -1,5 +1,5 @@
 The Fair Share tells individuals their fair share when paying for expenses. It is also a tool for financial simulations and planning to ensure a healthy
-financial life for you and those you love. Whether that is showing how each member of your family/friend group should spend on housing, cars, bills, etc.
+financial life for you and those you love. Whether that is showing how much each member of your family/friend group should spend on housing, cars, bills, etc.
 The Fair Share is also a powerful tool for demonstrating the immense power of compound interest and the potential wealth-building of setting money aside.
 
 We have the philosophy that the definition of fair changes with income. 
