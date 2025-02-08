@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request, jsonify
-import script  # Import your Python script
+import script  # Import the processing script
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        user_input = request.form["user_input"]  # Get input from form
-        result = script.process_input(user_input)  # Process input in script.py
-        return jsonify({"result": result})  # Send JSON response
+        inputs = request.form.to_dict()  # Get user inputs
+        result = script.process_multiple_inputs(inputs)  # Process them
+        return jsonify({"result": result})  # Return sum as JSON
     
     return render_template("index.html")
 
