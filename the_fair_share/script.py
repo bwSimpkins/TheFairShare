@@ -86,8 +86,8 @@ def process_multiple_inputs(inputs):
 
         return {
             'result': "\n".join(output_string),
-            'percentage_income_one': percentage_income[0],
-            'percentage_income_two': percentage_income[1]
+            'percentage_income_one': individual_contributions[0],
+            'percentage_income_two': individual_contributions[1]
         }
     except ValueError:
         return "Please enter valid numbers."
