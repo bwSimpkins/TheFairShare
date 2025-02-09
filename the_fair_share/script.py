@@ -58,10 +58,12 @@ def process_multiple_inputs(inputs):
         incomes = [float(value) for value in income_dict.values()]  # Convert inputs to floats
         household_income = sum(incomes)  # Calculate sum
         output_string = [f"Household Income: ${format_currecy_value(household_income)}"] # Adds to the output list
+        output_string.append("")
 
         # Calculate income percentages
         percentage_income = percent_of_household(incomes) # Get percentage of each income
         format_percent_of_household(percentage_income, output_string)
+        output_string.append("")
 
         # Get rent info
         rent = [float(value) for value in rest_dict.values()]  # Convert inputs to floats
