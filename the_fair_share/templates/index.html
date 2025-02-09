@@ -110,14 +110,18 @@
                         labels: ["Income 1", "Income 2"],
                         datasets: [{
                             data: [percentage_income_one, percentage_income_two],
-                            backgroundColor: ["#4CAF50", "#FF9800"], // Green & Orange
-                            hoverBackgroundColor: ["#45A049", "#FB8C00"]
+                            backgroundColor: ["#00994C", "#00FF80"], // Different Shades of Green
+                            hoverBackgroundColor: ["#00994C", "#00FF80"]
                         }]
                     },
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: { position: "bottom" }
+                            legend: { position: "bottom" },
+                            title: {
+                                display: true,
+                                text: 'Household Income Breakdown'
+                            }
                         }
                     }
                 });
