@@ -1,4 +1,5 @@
 import locale
+import numpy as np
 
 # Adds commas to the values and rounds decimals
 def format_currecy_value(value):
@@ -10,7 +11,7 @@ def format_currecy_value(value):
 def percent_of_household(incomes):
     percentages = []
     for income in incomes:
-        percentages.append((income / sum(incomes)) * 100)
+        percentages.append(round((income / sum(incomes)) * 100, 2))
     return percentages
 
 
@@ -38,6 +39,15 @@ def format_percent_of_household(percentage_income, output_string):
         output_string.append("Individual " + str(iterator) + " makes " + str(income) + "% of household income")
         iterator += 1
 
+
+# Format the percent of household incomes into a string
+def format_individual_contribution(individual_contributions, output_string):
+    iterator = 1
+    for contribution in individual_contributions:
+        output_string.append("Individual " + str(iterator) + " should pay $" + format_currecy_value(contribution))
+        iterator += 1
+
+
 def process_multiple_inputs(inputs):
     try:
         # Split keys into incomes and the rest of the inputs
@@ -56,7 +66,21 @@ def process_multiple_inputs(inputs):
         # Get rent info
         rent = [float(value) for value in rest_dict.values()]  # Convert inputs to floats
         rent = sum(rent)
-        output_string.append("Rent: $" + format_currecy_value(rent))
+
+        # Get the maximum amount this household should spend on rent a month
+        maximum_rent = (household_income / 12) * 0.30
+        output_string.append("We recommend your monthly rent should not exceed $" + format_currecy_value(maximum_rent))
+
+        # See if rent exceeds maximum
+        if rent > maximum_rent:
+            output_string.append("Your rent exceeds our recommended maximum rent.")
+        else:
+            # Using good ole Linear Algebra to solve the systems of equations
+            incomes_operator = np.array([incomes, [1, -1]])
+            equals = np.array([rent, 0])
+            solved = np.linalg.solve(incomes_operator, equals)
+            individual_contributions = solved * incomes
+            format_individual_contribution(individual_contributions, output_string)
 
         return "\n".join(output_string)
     except ValueError:
