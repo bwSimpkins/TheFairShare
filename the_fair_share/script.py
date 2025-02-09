@@ -76,13 +76,13 @@ def process_multiple_inputs(inputs):
         # See if rent exceeds maximum
         if rent > maximum_rent:
             output_string.append("Your rent exceeds our recommended maximum rent.")
-        else:
-            # Using good ole Linear Algebra to solve the systems of equations
-            incomes_operator = np.array([incomes, [1, -1]])
-            equals = np.array([rent, 0])
-            solved = np.linalg.solve(incomes_operator, equals)
-            individual_contributions = solved * incomes
-            format_individual_contribution(individual_contributions, output_string)
+            
+        # Using good ole Linear Algebra to solve the systems of equations
+        incomes_operator = np.array([incomes, [1, -1]])
+        equals = np.array([rent, 0])
+        solved = np.linalg.solve(incomes_operator, equals)
+        individual_contributions = solved * incomes
+        format_individual_contribution(individual_contributions, output_string)
 
         return {
             'result': "\n".join(output_string),
