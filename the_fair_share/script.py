@@ -71,12 +71,16 @@ def process_multiple_inputs(inputs):
 
         # Get the maximum amount this household should spend on rent a month
         maximum_rent = (household_income / 12) * 0.30
-        output_string.append("We recommend your monthly rent should not exceed $" + format_currecy_value(maximum_rent))
+        output_string.append("We recommend your monthly rent should not ")
+        output_string.append("exceed 30% of gross monthly household income.")
+        output_string.append("")
+        output_string.append("Maximum monthly rent: $" + format_currecy_value(maximum_rent))
+        output_string.append("")
 
         # See if rent exceeds maximum
         if rent > maximum_rent:
             output_string.append("Your rent exceeds our recommended maximum rent.")
-            
+
         # Using good ole Linear Algebra to solve the systems of equations
         incomes_operator = np.array([incomes, [1, -1]])
         equals = np.array([rent, 0])
