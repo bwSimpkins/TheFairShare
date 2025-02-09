@@ -84,6 +84,10 @@ def process_multiple_inputs(inputs):
             individual_contributions = solved * incomes
             format_individual_contribution(individual_contributions, output_string)
 
-        return "\n".join(output_string)
+        return {
+            'result': "\n".join(output_string),
+            'percentage_income_one': percentage_income[0],
+            'percentage_income_two': percentage_income[1]
+        }
     except ValueError:
         return "Please enter valid numbers."
