@@ -76,6 +76,8 @@ def process_multiple_inputs(inputs):
         # Get if user is a renter or buyer
         housing_option = [str(value) for value in housing_option.values()]
 
+        # Add a check for if it is a rentor or a buyer if buyer and has debt then we recommend not buying a house.
+
         # Get the maximum amount this household should spend on rent a month
         maximum_housing_expense = ((household_income / 12) * 0.30) - househould_debt
         output_string.append("Your monthly housing expense shouldn't exceed 30% of gross monthly household income minus your debt payments.")
