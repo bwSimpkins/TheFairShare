@@ -51,18 +51,20 @@ def format_individual_contribution(individual_contributions, output_string):
 def process_multiple_inputs(inputs):
     try:
         # Split keys into incomes and the rest of the inputs
-        keys_to_move = ['income1', 'income2', 'income3', 'income4', 'income5', 'income6', 'income7', 'income8', 'income9', 'income10']
+        keys_to_move = ['income1', 'income2']
         income_dict, rest_dict = split_dict(inputs, keys_to_move)
+        keys_to_move = ['debt1', 'debt2']
+        debt_dict, rest_dict = split_dict(rest_dict, keys_to_move)
 
         # Calculate sum of the incomes
         incomes = [float(value) for value in income_dict.values()]  # Convert inputs to floats
         household_income = sum(incomes)  # Calculate sum
         output_string = [f"Household Income: ${format_currecy_value(household_income)}"] # Adds to the output list
-        output_string.append("")
 
-        # Calculate income percentages
-        percentage_income = percent_of_household(incomes) # Get percentage of each income
-        format_percent_of_household(percentage_income, output_string)
+        # Calculate sum of the debts
+        debt = [float(value) for value in debt_dict.values()]  # Convert inputs to floats
+        househould_debt = sum(debt)
+        output_string.append("Household monthly debt: $" + format_currecy_value(househould_debt)) # Adds to the output list
         output_string.append("")
 
         # Get rent info
@@ -71,8 +73,7 @@ def process_multiple_inputs(inputs):
 
         # Get the maximum amount this household should spend on rent a month
         maximum_rent = (household_income / 12) * 0.30
-        output_string.append("We recommend your monthly rent should not ")
-        output_string.append("exceed 30% of gross monthly household income.")
+        output_string.append("We recommend your monthly rent should not exceed 30% of gross monthly household income minus your debt payments.")
         output_string.append("")
         output_string.append("Maximum monthly rent: $" + format_currecy_value(maximum_rent))
         output_string.append("")
