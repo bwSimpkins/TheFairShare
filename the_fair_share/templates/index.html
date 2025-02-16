@@ -8,17 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            max-width: 600px;
-            margin-top: 50px;
-        }
-        .card {
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+        body { background-color: #f8f9fa; }
+        .container { max-width: 600px; margin-top: 50px; }
+        .card { border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
 <body>
@@ -26,10 +18,14 @@
         <div class="card p-4">
             <h2 class="text-center mb-4">The Fair Share's Rent Calculator</h2>
 
-            <!-- Initial input to determine number of fields -->
+            <!-- Rent or Buy Dropdown -->
             <div class="mb-3">
-                <label for="numFields" class="form-label">Enter number of individuals in your home:</label>
-                <input type="number" class="form-control" id="numFields" min="1" max="10" placeholder="Number of individuals...">
+                <label for="rentOrBuy" class="form-label">Housing Status:</label>
+                <select class="form-select" id="rentOrBuy">
+                    <option value="" selected disabled>Select which applies to your status...</option>
+                    <option value="rent">Rent</option>
+                    <option value="buy">Buy</option>
+                </select>
             </div>
 
             <!-- Container for dynamically generated input fields -->
@@ -56,24 +52,23 @@
         let pieChart; // Global chart variable
 
         $(document).ready(function() {
-            $("#numFields").on("input", function() {
-                let numFields = parseInt($(this).val());
+            $("#rentOrBuy").on("change", function() {
+                let option = $(this).val();
                 let inputContainer = $("#inputContainer");
                 let submitButton = $("#dynamicForm button");
 
                 inputContainer.empty(); // Clear previous inputs
 
-                if (!isNaN(numFields) && numFields > 0 && numFields <= 10) {
-                    for (let i = 1; i <= numFields; i++) {
-                        inputContainer.append(`
-                            <div class="mb-2">
-                                <input type="text" class="form-control" name="income${i}" placeholder="Individual ${i}'s yearly income..." required>
-                            </div>
-                        `);
-                    }
+                if (option === "rent" || option === "buy") {
                     inputContainer.append(`
                         <div class="mb-2">
-                            <input type="text" class="form-control" name="rent" placeholder="Enter in monthly rent..." required>
+                            <input type="text" class="form-control" name="income1" placeholder="Individual 1's yearly income..." required>
+                        </div>
+                        <div class="mb-2">
+                            <input type="text" class="form-control" name="income2" placeholder="Individual 2's yearly income..." required>
+                        </div>
+                        <div class="mb-2">
+                            <input type="text" class="form-control" name="expense" placeholder="Enter ${option === "rent" ? "monthly rent" : "mortgage payment"}..." required>
                         </div>
                     `);
                     submitButton.show();
@@ -87,14 +82,14 @@
                 let formData = $(this).serialize();
 
                 $.post("/", formData, function(data) {
-                $("#resultText").html(data.result.replace(/\n/g, "<br>")); // Convert newlines to <br>
-                $("#resultContainer").fadeIn();
+                    $("#resultText").html(data.result.replace(/\n/g, "<br>")); // Convert newlines to <br>
+                    $("#resultContainer").fadeIn();
 
-                let percentage_income_one = parseFloat(data.percentage_income_one);
-                let percentage_income_two = parseFloat(data.percentage_income_two);
+                    let percentage_income_one = parseFloat(data.percentage_income_one);
+                    let percentage_income_two = parseFloat(data.percentage_income_two);
 
-                updatePieChart(percentage_income_one, percentage_income_two);
-            }, "json");
+                    updatePieChart(percentage_income_one, percentage_income_two);
+                }, "json");
             });
 
             function updatePieChart(percentage_income_one, percentage_income_two) {
@@ -120,7 +115,7 @@
                             legend: { position: "bottom" },
                             title: {
                                 display: true,
-                                text: 'Rent Payment Breakdown'
+                                text: 'Payment Breakdown'
                             }
                         }
                     }
