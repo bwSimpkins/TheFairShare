@@ -7,6 +7,8 @@ app = Flask(__name__)
 def index():
     if request.method == "POST":
         inputs = request.form.to_dict()  # Get user inputs
+        rent_or_buy = inputs.get("rentOrBuy", "")  # Get rent or buy selection
+        inputs["rentOrBuy"] = rent_or_buy  # Ensure it's included in inputs
         result = script.process_multiple_inputs(inputs)  # Process them
         return jsonify({'result': result['result'], 'percentage_income_one': result['percentage_income_one'], 'percentage_income_two': result['percentage_income_two']})  # Return sum as JSON
     

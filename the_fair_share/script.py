@@ -55,6 +55,8 @@ def process_multiple_inputs(inputs):
         income_dict, rest_dict = split_dict(inputs, keys_to_move)
         keys_to_move = ['debt1', 'debt2']
         debt_dict, rest_dict = split_dict(rest_dict, keys_to_move)
+        keys_to_move = ['rentOrBuy']
+        housing_option, rest_dict = split_dict(rest_dict, keys_to_move)
 
         # Calculate sum of the incomes
         incomes = [float(value) for value in income_dict.values()]  # Convert inputs to floats
@@ -70,6 +72,9 @@ def process_multiple_inputs(inputs):
         # Get rent info
         housing_expense = [float(value) for value in rest_dict.values()]  # Convert inputs to floats
         housing_expense = sum(housing_expense)
+
+        # Get if user is a renter or buyer
+        housing_option = [str(value) for value in housing_option.values()]
 
         # Get the maximum amount this household should spend on rent a month
         maximum_housing_expense = ((household_income / 12) * 0.30) - househould_debt

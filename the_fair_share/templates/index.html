@@ -85,7 +85,8 @@
 
             $("#dynamicForm").submit(function(event) {
                 event.preventDefault();
-                let formData = $(this).serialize();
+                let rentOrBuy = $("#rentOrBuy").val();
+                let formData = $(this).serialize() + `&rentOrBuy=${rentOrBuy}`;
 
                 $.post("/", formData, function(data) {
                     $("#resultText").html(data.result.replace(/\n/g, "<br>")); // Convert newlines to <br>
