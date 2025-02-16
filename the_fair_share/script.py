@@ -68,24 +68,24 @@ def process_multiple_inputs(inputs):
         output_string.append("")
 
         # Get rent info
-        rent = [float(value) for value in rest_dict.values()]  # Convert inputs to floats
-        rent = sum(rent)
+        housing_expense = [float(value) for value in rest_dict.values()]  # Convert inputs to floats
+        housing_expense = sum(housing_expense)
 
         # Get the maximum amount this household should spend on rent a month
-        maximum_rent = ((household_income / 12) * 0.30) - househould_debt
-        output_string.append("We recommend your monthly rent should not exceed 30% of gross monthly household income minus your debt payments.")
+        maximum_housing_expense = ((household_income / 12) * 0.30) - househould_debt
+        output_string.append("Your monthly housing expense shouldn't exceed 30% of gross monthly household income minus your debt payments.")
         output_string.append("")
-        output_string.append("Maximum monthly rent: $" + format_currecy_value(maximum_rent))
+        output_string.append("Maximum monthly housing expense: $" + format_currecy_value(maximum_housing_expense))
 
         # See if rent exceeds maximum
-        if rent > maximum_rent:
-            output_string.append("Your rent exceeds our recommended maximum rent.")
+        if housing_expense > maximum_housing_expense:
+            output_string.append("Your housing expense exceeds our recommended maximum housing expense.")
 
         output_string.append("")
 
         # Using good ole Linear Algebra to solve the systems of equations
         incomes_operator = np.array([incomes, [1, -1]])
-        equals = np.array([rent, 0])
+        equals = np.array([housing_expense, 0])
         solved = np.linalg.solve(incomes_operator, equals)
         individual_contributions = solved * incomes
         format_individual_contribution(individual_contributions, output_string)
