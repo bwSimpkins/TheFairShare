@@ -79,7 +79,7 @@ def process_multiple_inputs(inputs):
 
         # See if rent exceeds maximum
         if housing_expense > maximum_housing_expense:
-            output_string.append("Your housing expense exceeds our recommended maximum housing expense.")
+            output_string.append("Your housing expense exceeds maximum housing expense.")
 
         output_string.append("")
 
