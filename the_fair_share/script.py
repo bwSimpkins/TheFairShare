@@ -7,14 +7,6 @@ def format_currecy_value(value):
     return locale.currency(value, symbol=False, grouping=True)
 
 
-# Calculates the percent of each person's income towards the household income
-def percent_of_household(incomes):
-    percentages = []
-    for income in incomes:
-        percentages.append(round((income / sum(incomes)) * 100, 2))
-    return percentages
-
-
 def split_dict(input_dict, keys_to_split):
     """Splits a dictionary into two based on specified keys.
 
@@ -33,19 +25,11 @@ def split_dict(input_dict, keys_to_split):
 
 
 # Format the percent of household incomes into a string
-def format_percent_of_household(percentage_income, output_string):
-    iterator = 1
-    for income in percentage_income:
-        output_string.append("Individual " + str(iterator) + " makes " + str(income) + "% of household income")
-        iterator += 1
-
-
-# Format the percent of household incomes into a string
 def format_individual_contribution(individual_contributions, output_string):
-    iterator = 1
+    individual = "One"
     for contribution in individual_contributions:
-        output_string.append("Individual " + str(iterator) + " should pay $" + format_currecy_value(contribution))
-        iterator += 1
+        output_string.append("Individual " + individual + " should pay $" + format_currecy_value(contribution))
+        individual = "Two"
 
 
 def process_multiple_inputs(inputs):
@@ -61,12 +45,12 @@ def process_multiple_inputs(inputs):
         # Calculate sum of the incomes
         incomes = [float(value) for value in income_dict.values()]  # Convert inputs to floats
         household_income = sum(incomes)  # Calculate sum
-        output_string = [f"Household Income: ${format_currecy_value(household_income)}"] # Adds to the output list
+        output_string = [f"Yearly household income: ${format_currecy_value(household_income)}"] # Adds to the output list
 
         # Calculate sum of the debts
         debt = [float(value) for value in debt_dict.values()]  # Convert inputs to floats
         househould_debt = sum(debt)
-        output_string.append("Household monthly debt: $" + format_currecy_value(househould_debt)) # Adds to the output list
+        output_string.append("Household monthly debt payment: $" + format_currecy_value(househould_debt)) # Adds to the output list
         output_string.append("")
 
         # Get rent info
