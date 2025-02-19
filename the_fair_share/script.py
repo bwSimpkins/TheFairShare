@@ -73,15 +73,29 @@ def process_multiple_inputs(inputs):
         # See if rent exceeds maximum
         if housing_expense > maximum_housing_expense:
             output_string.append("Your housing expense exceeds maximum housing expense")
-
+        
         output_string.append("")
-
+        
         # Using good ole Linear Algebra to solve the systems of equations
         incomes_operator = np.array([incomes, [1, -1]])
         equals = np.array([housing_expense, 0])
         solved = np.linalg.solve(incomes_operator, equals)
         individual_contributions = solved * incomes
         format_individual_contribution(individual_contributions, output_string)
+
+        x_axis = []
+        y_axis = []
+        investment_total = 0
+        monthly_investment = maximum_housing_expense - housing_expense
+        if housing_expense < maximum_housing_expense:
+            # Calculates how much a household could make a year by staying underneath the maximum and investing what would go to debt payments
+            for year in range(1, 40):
+                investment_total = (investment_total + ((monthly_investment) * 12)) * (1.10)
+                x_axis.append(year)
+                y_axis.append(investment_total)
+            
+            output_string.append("")
+            output_string.append("Investing $" + format_currecy_value(monthly_investment) + " each month instead of maxing housing expense would equal : $" + format_currecy_value(investment_total) + " in 40 years.")
 
         return {
             'result': "\n".join(output_string),
