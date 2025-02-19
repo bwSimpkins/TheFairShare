@@ -62,16 +62,16 @@
                 if (option === "rent" || option === "buy") {
                     inputContainer.append(`
                         <div class="mb-2">
-                            <input type="text" class="form-control" name="income1" placeholder="Individual 1's yearly income..." required>
+                            <input type="text" class="form-control" name="income1" placeholder="Individual One's yearly income..." required>
                         </div>
                         <div class="mb-2">
-                            <input type="text" class="form-control" name="debt1" placeholder="Individual 1's monthly debt payments..." required>
+                            <input type="text" class="form-control" name="debt1" placeholder="Individual One's monthly debt payments..." required>
                         </div>
                         <div class="mb-2">
-                            <input type="text" class="form-control" name="income2" placeholder="Individual 2's yearly income..." required>
+                            <input type="text" class="form-control" name="income2" placeholder="Individual Two's yearly income..." required>
                         </div>
                         <div class="mb-2">
-                            <input type="text" class="form-control" name="debt2" placeholder="Individual 2's monthly debt payments..." required>
+                            <input type="text" class="form-control" name="debt2" placeholder="Individual Two's monthly debt payments..." required>
                         </div>
                         <div class="mb-2">
                             <input type="text" class="form-control" name="expense" placeholder="Enter ${option === "rent" ? "monthly rent" : "mortgage payment"}..." required>
@@ -109,7 +109,7 @@
                 pieChart = new Chart(ctx, {
                     type: "pie",
                     data: {
-                        labels: ["Individual 1", "Individual 2"],
+                        labels: ["Individual One", "Individual Two"],
                         datasets: [{
                             data: [percentage_income_one, percentage_income_two],
                             backgroundColor: ["#00994C", "#00FF80"], // Different Shades of Green
