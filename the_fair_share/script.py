@@ -59,9 +59,6 @@ def process_multiple_inputs(inputs):
 
         # Get if user is a renter or buyer
         housing_option = [str(value) for value in housing_option.values()]
-        print(housing_option)
-
-        # Add a check for if it is a rentor or a buyer if buyer and has debt then we recommend not buying a house.
 
         # Get the maximum amount this household should spend on rent a month
         maximum_housing_expense = ((household_income / 12) * 0.30) - househould_debt
@@ -91,7 +88,7 @@ def process_multiple_inputs(inputs):
             # Calculates how much a household could make a year by staying underneath the maximum and investing what would go to debt payments
             for year in range(1, 40):
                 investment_total = (investment_total + ((monthly_investment) * 12)) * (1.10)
-                x_axis.append(year)
+                x_axis.append(year + 1)
                 y_axis.append(investment_total)
             
             output_string.append("")
@@ -100,7 +97,9 @@ def process_multiple_inputs(inputs):
         return {
             'result': "\n".join(output_string),
             'percentage_income_one': individual_contributions[0],
-            'percentage_income_two': individual_contributions[1]
+            'percentage_income_two': individual_contributions[1],
+            'year': x_axis,
+            'investment_total': y_axis
         }
     except ValueError:
         return "Please enter valid numbers."

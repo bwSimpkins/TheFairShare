@@ -43,13 +43,19 @@
             <div class="mt-3">
                 <canvas id="pieChart"></canvas>
             </div>
+
+            <!-- Pie Chart -->
+            <div class="mt-3">
+                <canvas id="barChart"></canvas>
+            </div>
         </div>
     </div>
 
     <!-- Bootstrap & JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        let pieChart; // Global chart variable
+        let pieChart; // Global pie chart variable
+        let barChart; // Global variable for bar chart
 
         $(document).ready(function() {
             $("#rentOrBuy").on("change", function() {
@@ -95,7 +101,11 @@
                     let percentage_income_one = parseFloat(data.percentage_income_one);
                     let percentage_income_two = parseFloat(data.percentage_income_two);
 
+                    let year = data.year;
+                    let investment_total = data.investment_total;
+
                     updatePieChart(percentage_income_one, percentage_income_two);
+                    updateBarChart(year, investment_total);
                 }, "json");
             });
 
@@ -123,6 +133,47 @@
                             title: {
                                 display: true,
                                 text: 'Monthly Housing Payment Breakdown'
+                            }
+                        }
+                    }
+                });
+            }
+
+            function updateBarChart(years, investments) {
+                let ctx = document.getElementById("barChart").getContext("2d");
+
+                if (barChart) {
+                    barChart.destroy(); // Destroy previous instance
+                }
+
+                barChart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: years,
+                        datasets: [{
+                            label: "Investment Total",
+                            data: investments,
+                            backgroundColor: "#00994C",
+                            hoverBackgroundColor: "#00FF80"
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { 
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'Housing Savings Investment Total'
                             }
                         }
                     }

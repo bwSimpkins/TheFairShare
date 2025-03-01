@@ -10,7 +10,8 @@ def index():
         rent_or_buy = inputs.get("rentOrBuy", "")  # Get rent or buy selection
         inputs["rentOrBuy"] = rent_or_buy  # Ensure it's included in inputs
         result = script.process_multiple_inputs(inputs)  # Process them
-        return jsonify({'result': result['result'], 'percentage_income_one': result['percentage_income_one'], 'percentage_income_two': result['percentage_income_two']})  # Return sum as JSON
+        return jsonify({'result': result['result'], 'percentage_income_one': result['percentage_income_one'], 'percentage_income_two': result['percentage_income_two'],
+                        'year': result['year'], 'investment_total': result['investment_total']})  # Return values calculated in the script class
     
     return render_template("index.html")
 
