@@ -41,12 +41,12 @@
 
             <!-- Pie Chart -->
             <div class="mt-3">
-                <canvas id="pieChart"></canvas>
+                <canvas id="pieChart" width="50" height="50"></canvas>
             </div>
 
             <!-- Pie Chart -->
             <div class="mt-3">
-                <canvas id="barChart"></canvas>
+                <canvas id="barChart" height="200"></canvas>
             </div>
         </div>
     </div>
@@ -146,6 +146,29 @@
                     barChart.destroy(); // Destroy previous instance
                 }
 
+                // Default bar colors
+                let backgroundColors = investments.map(() => "#00994C"); // Default green color
+                let hoverColors = investments.map(() => "#00FF80"); // Default green color
+
+                // Track whether thresholds have been found
+                let found100K = false, found1M = false, found5M = false;
+
+                for (let i = 0; i < investments.length; i++) {
+                    if (investments[i] > 5000000 && !found5M) {
+                        backgroundColors[i] = "#FDBD01"; // Red for > 5M
+                        hoverColors[i] = "#FFD700"
+                        found5M = true;
+                    } else if (investments[i] > 1000000 && !found1M) {
+                        backgroundColors[i] = "#FDBD01"; // Orange for > 1M
+                        hoverColors[i] = "#FFD700"
+                        found1M = true;
+                    } else if (investments[i] > 100000 && !found100K) {
+                        backgroundColors[i] = "#FDBD01"; // Yellow for > 100K
+                        hoverColors[i] = "#FFD700"
+                        found100K = true;
+                    }
+                }
+
                 barChart = new Chart(ctx, {
                     type: "bar",
                     data: {
@@ -153,8 +176,8 @@
                         datasets: [{
                             label: "Investment Total",
                             data: investments,
-                            backgroundColor: "#00994C",
-                            hoverBackgroundColor: "#00FF80"
+                            backgroundColor: backgroundColors,
+                            hoverBackgroundColor: hoverColors
                         }]
                     },
                     options: {
