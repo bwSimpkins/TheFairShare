@@ -1,7 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
+import os
 import script  # Import the processing script
 
 app = Flask(__name__)
+
+parent_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -13,7 +17,7 @@ def index():
         return jsonify({'result': result['result'], 'percentage_income_one': result['percentage_income_one'], 'percentage_income_two': result['percentage_income_two'],
                         'year': result['year'], 'investment_total': result['investment_total']})  # Return values calculated in the script class
     
-    return render_template("index.html")
+    return send_from_directory(parent_directory, 'index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
