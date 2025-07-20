@@ -61,11 +61,14 @@ def process_multiple_inputs(inputs):
         housing_option = [str(value) for value in housing_option.values()]
 
         # Get the maximum amount this household should spend on rent a month
+        maximum_housing_expense_no_debt = ((household_income / 12) * 0.30)
         maximum_housing_expense = ((household_income / 12) * 0.30) - househould_debt
         if housing_option[0] == 'buy' and househould_debt > 0:
             output_string.append("We recommend not buying a home until all debt is cleared")
 
-        output_string.append("Maximum monthly housing expense: $" + format_currecy_value(maximum_housing_expense))
+        # Show user the importance of cutting out debt
+        output_string.append("Maximum monthly housing expense (without debt): $" + format_currecy_value(maximum_housing_expense_no_debt))
+        output_string.append("Maximum monthly housing expense (with debt): $" + format_currecy_value(maximum_housing_expense))
 
         # See if rent exceeds maximum
         if housing_expense > maximum_housing_expense:
